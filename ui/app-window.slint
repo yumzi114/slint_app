@@ -2,6 +2,7 @@ import { Button, VerticalBox } from "std-widgets.slint";
 import { Pages } from "page/adapta.slint";
 export component AnimatedButton inherits Rectangle {
     in property <string> label: "버튼";
+    
     property <bool> hovered: false;
     property <bool> pressed: false;
     
@@ -72,7 +73,8 @@ export component AnimatedButton inherits Rectangle {
 
 export component AppWindow inherits Window {
     in-out property <int> selected_menu: 0;
-    in-out property <string> status_text: "시작!";
+    in-out property <[string]> socket_messages: [];
+    // in-out property <string> status_text: "시작!";
     preferred-width: 800px;
     preferred-height: 900px;
     in-out property <int> counter: 42;
@@ -167,7 +169,7 @@ export component AppWindow inherits Window {
         }
         Pages {
             selected_menu: root.selected_menu;
-            status_text: root.status_text;
+            socket_messages: root.socket_messages;
         }
         // if(root.selected_menu == 0) : Main {}
         // if(root.selected_menu == 1) : Serial {}

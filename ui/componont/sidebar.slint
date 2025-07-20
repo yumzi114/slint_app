@@ -12,6 +12,7 @@ component SideBarItem inherits Rectangle {
     height: 40px;
     width: 90px;
     
+    
     // padding: 40px;
     // min-height: l.preferred-height;
     accessible-role: tab;
@@ -45,6 +46,7 @@ component SideBarItem inherits Rectangle {
     }
     
     l := HorizontalBox {
+        
         y: (parent.height - self.height) / 2;
         spacing: 0px;
         
@@ -70,14 +72,18 @@ component SideBarItem inherits Rectangle {
 export component SideBar inherits Rectangle {
     in property <[string]> model: ["Socket","MQTT","API"];
     out property <int> current-item: 0;
-    width: 180px;
-    VerticalBox {
+    width: 120px;
+    HorizontalLayout {
+        Rectangle {width: 15px;}
         navigation := VerticalLayout {
+            
+            
             spacing: 10px;
+            
             for item[index] in root.model : SideBarItem {
                 
                 SideBarItem{
-
+    
                     clicked => { root.current-item = index; }
                     tab-index: index;
                     // has-focus: index == root.current-focused;
@@ -89,8 +95,5 @@ export component SideBar inherits Rectangle {
         Rectangle {
             height: 500px;
         }
-        
-        
     }
-    
 }

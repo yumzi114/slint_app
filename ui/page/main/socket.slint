@@ -1,9 +1,99 @@
+import { ListView } from "std-widgets.slint";
+// export component ChatRow inherits Rectangle {
+//     in property <int> temp_index: 0;
+//     in property <string> msg: "";
+
+//     // temp_index 활용 가능
+//     Text { 
+//         text: msg + " (" + temp_index + ")"; }
+// }
+
+export component ChatRow inherits Rectangle {
+    in property <string> msg: "";
+    in property <bool> highlight: false;
+
+    height: highlight ? 40px : 16px;
+    background: transparent;
+    highg:=Rectangle {
+        high:=Text {
+            text: msg;
+            font-size: highlight ? 20px : 14px;
+            font-weight: highlight ? 900 : 600;
+            color:@linear-gradient(180deg, #e6e7ec, #6100FF);
+            // color: highlight
+            //     ? @linear-gradient(120deg, #f53030, #6ccf3e)
+            //     : @linear-gradient(180deg, #e6e7ec, #6100FF);
+    
+            vertical-alignment: center;
+            // animate font-size { duration: 400ms; easing: ease-in-bounce; }
+            animate color { duration: 200ms; easing: ease-in-bounce; }
+        }
+    }
+    
+    states [
+        high when highlight:{
+            high.color:@linear-gradient(120deg, #f53030, #6ccf3e);
+            // in {
+            //     animate high.color { duration: 800ms; easing: ease-in-bounce; }
+            // }
+            
+            // in {
+            //     animate highg.color {
+            //         duration: 200ms;
+            //         easing: ease-out-sine;
+            //     }
+            // }
+        }
+        // normal: {},
+        // highlight: {}
+    ]
+}
+
 export component Socket inherits Rectangle {
-    in property <string> status_text;
-    HorizontalLayout {
+    in-out property <[string]> socket_messages: [];
+    in-out property <int> highlight_index: -1;
+    in property <int> temp_index: 0;
+    VerticalLayout {
+        Rectangle {height: 20px;}
+        
+        for msg[index] in root.socket_messages : ChatRow {
+            msg: msg;
+            highlight: index == root.socket_messages.length - 1;
+
+            // clicked => { root.highlight_index = index; }
+        }
+        // for msg[index] in root.socket_messages :
+        
+        // ChatRow {
+        //     temp_index:index;
+        //     height: index == root.socket_messages.length - 1 ? 40px : 16px;
+        //     background: transparent;
+        //     temp_index:=Text {
+        //         text: msg;
+        //         font-size: index == root.socket_messages.length - 1 ? 20px : 14px;
+
+        //         font-weight: index == root.socket_messages.length - 1 ? 900 : 400;
+        //         color: index == root.socket_messages.length - 1
+        //             ? @linear-gradient(120deg, #f53030, #6ccf3e)
+        //             : @linear-gradient(180deg, #e6e7ec, #6100FF);
+                
+        //         vertical-alignment: center;
+                
+        //         // animate font-size { 
+        //         //     duration: 400ms;
+        //         //     easing: ease-in-bounce;
+        //         //  }
+        //         // animate color { 
+        //         //     duration: 800ms; 
+        //         //     easing: ease-in-bounce;
+        //         // }
+        //     }
+            
+            
+        // }
         Text {
             color: #f7f7f7;
-            text: status_text;
+            // text: status_text;
         }
     }
 }

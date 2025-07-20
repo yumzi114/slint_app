@@ -4,11 +4,11 @@ import {Main} from "main.slint";
 
 export component Pages inherits Rectangle {
     in property <int> selected_menu: 0;
-    in property <string> status_text;
+    in-out property <[string]> socket_messages: [];
     Main {
         opacity: root.selected_menu == 0 ? 1.0 : 0.0;
         visible: root.selected_menu == 0 || self.opacity > 0.0;
-        status_text: root.status_text;
+        socket_messages: root.socket_messages;
         animate opacity { duration: 250ms; }
     }
     Serial {

@@ -7,7 +7,7 @@ import { Socket } from "main/socket.slint";
 export component Main inherits Rectangle {
     background: #000000;
     // in property <bool> open: false;
-    in property <string> status_text;
+    in-out property <[string]> socket_messages: [];
     
     animate background {
         duration: 500ms;
@@ -22,7 +22,7 @@ export component Main inherits Rectangle {
     
             }
             Socket{
-                status_text: root.status_text;
+                socket_messages: root.socket_messages;
             }
             // Text { 
             

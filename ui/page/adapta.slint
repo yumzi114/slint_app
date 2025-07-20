@@ -1,0 +1,25 @@
+import {Temp} from "temp.slint";
+import {Serial} from "serial.slint";
+import {Main} from "main.slint";
+
+export component Pages inherits Rectangle {
+    in property <int> selected_menu: 0;
+    in property <string> status_text;
+    Main {
+        opacity: root.selected_menu == 0 ? 1.0 : 0.0;
+        visible: root.selected_menu == 0 || self.opacity > 0.0;
+        status_text: root.status_text;
+        animate opacity { duration: 250ms; }
+    }
+    Serial {
+        opacity: root.selected_menu == 1 ? 1.0 : 0.0;
+        visible: root.selected_menu == 1 || self.opacity > 0.0;
+        animate opacity { duration: 250ms; }
+    }
+    Temp {
+        opacity: root.selected_menu == 2 ? 1.0 : 0.0;
+        visible: root.selected_menu == 2 || self.opacity > 0.0;
+        animate opacity { duration: 250ms; }
+    }
+    
+}

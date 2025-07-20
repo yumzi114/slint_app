@@ -1,0 +1,41 @@
+import { HorizontalBox, VerticalBox, Palette } from "std-widgets.slint";
+import { SideBar } from "../componont/sidebar.slint";
+import { Socket } from "main/socket.slint";
+
+
+
+export component Main inherits Rectangle {
+    background: #000000;
+    // in property <bool> open: false;
+    in property <string> status_text;
+    
+    animate background {
+        duration: 500ms;
+    }
+    VerticalLayout {
+        Rectangle {
+            height: 39px;
+        }
+        HorizontalLayout {
+        
+            SideBar{
+    
+            }
+            Socket{
+                status_text: root.status_text;
+            }
+            // Text { 
+            
+            //     color: #f7f7f7;
+            //     text: status_text;
+            //     animate color {
+            //         duration: 500ms;
+            //     }
+            // }
+        }
+    }
+    
+    
+    
+    
+}
